@@ -7,50 +7,23 @@
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
     New blog
     </button>
-    <form:form commandName="blog">
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">New Blog</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-		<label for="name" class="col-sm-2 control-label">Name:</label>
-		<div class="col-sm-10">
-			<form:input path="name" cssClass="form-control" />
-			<form:errors path="name" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="name" class="col-sm-2 control-label">URL:</label>
-		<div class="col-sm-10">
-			<form:input path="url" cssClass="form-control" />
-			<form:errors path="name" />
-		</div>
-	</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary value="save"/>
-    </div>
-  </div>
-</div>
-</form:form>
-
+    
 
 
 
 <br /><br />
 
 <script type="text/javascript">
-$(document).ready(function() {
-	$('.nav-tabs a:first').tab('show');
-});
-}
-</script>
+		  $(document).ready(function(){
+			  $('.nav-tabs a:first').tab('show'); 
+			  $(".triggerRemove").click(function(e){
+				  
+				  e.preventDefault();
+				  $("#modalRemove").modal('show');
+				  $("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
+			  });
+		  });
+		</script>
 
 <ul class="nav nav-tabs">
 	<c:forEach items="${user.blogs}" var="blog">
@@ -86,4 +59,21 @@ $(document).ready(function() {
 	</table>
   </div>
 </c:forEach>
+</div>
+<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remove Blog</h4>
+      </div>
+      <div class="modal-body">
+      Really you want to remove?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a href="" class="btn btn-danger removeBtn">Remove</a>
+      </div>
+    </div>
+  </div>
 </div>

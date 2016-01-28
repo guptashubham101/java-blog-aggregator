@@ -1,12 +1,16 @@
 package cz.shubham.jba.entity;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 public class Blog {
@@ -14,8 +18,10 @@ public class Blog {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+	@Size(min=1,message="enter the name")
 	private String name;
+	@Size(min=1,message="enter the name")
+	@URL(message="enter the name")
 	private String url;
 	
 	@ManyToOne
@@ -28,7 +34,7 @@ public class Blog {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	@OneToMany(mappedBy="blog")
+	@OneToMany(mappedBy="blog" , cascade=CascadeType.REMOVE)
 	private List<Item> items;
 	
 	public User getUser() {

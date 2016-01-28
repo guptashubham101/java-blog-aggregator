@@ -2,12 +2,19 @@ package cz.shubham.jba.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
+import cz.shubham.jba.annoatation.UniqueUsername;
 
 @Entity
 public class User {
@@ -15,8 +22,14 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	@Size(min=3,message="enter the name")
+	@Column(unique=true)
+	@UniqueUsername(message="this name already exist!")
 	private String name;
+	@Size(min=3,message="enter the email")
+	@Email(message="enter the email")
 	private String email;
+	@Size(min=5,message="enter the password")
 	private String password;
 	public boolean isEnabled() {
 		return enabled;
@@ -34,7 +47,7 @@ public class User {
 	
 
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user" , cascade=CascadeType.REMOVE)
 	private List<Blog> blogs;
 	
 	public List<Role> getRoles() {

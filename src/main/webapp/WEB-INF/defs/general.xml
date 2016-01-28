@@ -29,4 +29,9 @@
      <put-attribute name="body" value="/WEB-INF/jsp/user-register.jsp" />
      <put-attribute name="current" value="register"/> 
   </definition>
+  <definition name="account" extends="common">
+     <put-attribute name="title" value="User account" />
+     <put-attribute name="body" value="/WEB-INF/jsp/user-account.jsp" />
+     <put-attribute name="current" value="account"/> 
+  </definition>
 </tiles-definitions>

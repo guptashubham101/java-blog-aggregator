@@ -43,6 +43,15 @@ import cz.shubham.jba.repository.UserRepository;
 			blogRepository.save(blog);
 			//saveItems(blog);
 		}
+		
+		  @PreAuthorize("#blog.user.name == authentication.name or hasRole('ROLE_ADMIN')")
+			public void delete(@P("blog")Blog blog) {
+				blogRepository.delete(blog);
+				
+			}
+		public Blog findOne(int id) {
+			return blogRepository.findOne(id);
+		}
 
 }
 

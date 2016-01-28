@@ -72,7 +72,15 @@ public class UserService {
 		User user = userRepository.findByName(name);
 		return findOneWithBlogs(user.getId());
 	}
+	
 
+	
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
 
 
